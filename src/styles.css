@@ -1,0 +1,34 @@
+:root { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 480px;
+  min-height: var(--tg-viewport-stable-height, 100dvh);
+  margin: 0 auto;
+  padding:
+    calc(24px + max(env(safe-area-inset-top), var(--tg-safe-area-inset-top, 0px)) + var(--tg-content-safe-area-inset-top, 0px))
+    calc(16px + max(env(safe-area-inset-right), var(--tg-safe-area-inset-right, 0px)) + var(--tg-content-safe-area-inset-right, 0px))
+    calc(24px + max(env(safe-area-inset-bottom), var(--tg-safe-area-inset-bottom, 0px)) + var(--tg-content-safe-area-inset-bottom, 0px))
+    calc(16px + max(env(safe-area-inset-left), var(--tg-safe-area-inset-left, 0px)) + var(--tg-content-safe-area-inset-left, 0px));
+
+}
+
+.app-icon { font-size: 72px; }
+.browser-preview { padding: 0 16px; text-align: center; }
+.browser-preview p { font-size: 13px; color: var(--tgui--hint_color); }
+
+
+/* AppRoot задаёт палитру, но фон страницы нужно применить явно. */
+.theme-root {
+  min-height: 100dvh;
+  background-color: var(--tgui--bg_color);
+  color-scheme: light;
+}
+.theme-root[data-appearance='dark'] { color-scheme: dark; }
+
+/* Подсветка и ripple остаются внутри скруглённой кнопки. */
+.theme-toggle { overflow: hidden; }
+.theme-toggle::after { border-radius: inherit; }
