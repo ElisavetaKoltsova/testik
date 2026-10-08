@@ -7,3 +7,4 @@ export { QuestionEditor } from './QuestionEditor';
 export { QuestionStep } from './QuestionStep';
 export { TestPreview } from './TestPreview';
 export { TestResult } from './TestResult';
+export { ApiStatus } from './ApiStatus';
