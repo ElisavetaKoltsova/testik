@@ -1,0 +1,21 @@
+.custom-test-card {
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: 16px;
+    background: var(--tgui--secondary_bg_color);
+}
+.custom-test-card h2 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.3;
+}
+.custom-test-card p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--tgui--hint_color);
+}
+.custom-test-card .custom-test-status {
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 12px;
+}

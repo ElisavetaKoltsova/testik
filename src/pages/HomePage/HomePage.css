@@ -1,0 +1,12 @@
+.ready-tests {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--tgui--secondary_bg_color);
+}
+.privacy-note {
+    padding: 6px 16px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--tgui--hint_color);
+}

@@ -1,0 +1,42 @@
+/* Telegram UI задаёт палитру; фон применяем ко всей странице. */
+.theme-root {
+    min-height: 100dvh;
+    background-color: var(--tgui--bg_color);
+    color-scheme: light;
+}
+.theme-root[data-appearance='dark'] {
+    color-scheme: dark;
+}
+.app {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    min-height: var(--tg-viewport-stable-height, 100dvh);
+    margin: 0 auto;
+    padding: calc(
+            24px + max(env(safe-area-inset-top), var(--tg-safe-area-inset-top, 0px)) +
+                var(--tg-content-safe-area-inset-top, 0px)
+        )
+        calc(
+            16px + max(env(safe-area-inset-right), var(--tg-safe-area-inset-right, 0px)) +
+                var(--tg-content-safe-area-inset-right, 0px)
+        )
+        calc(
+            24px + max(env(safe-area-inset-bottom), var(--tg-safe-area-inset-bottom, 0px)) +
+                var(--tg-content-safe-area-inset-bottom, 0px)
+        )
+        calc(
+            16px + max(env(safe-area-inset-left), var(--tg-safe-area-inset-left, 0px)) +
+                var(--tg-content-safe-area-inset-left, 0px)
+        );
+}
+.screen-content {
+    flex: 1;
+    min-width: 0;
+}
+.rounded-button {
+    overflow: hidden;
+}
+.app button::after {
+    border-radius: inherit;
+}

@@ -1,0 +1,1 @@
+export { CustomTestCard } from './CustomTestCard';

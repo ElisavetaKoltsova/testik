@@ -1,0 +1,33 @@
+.test-card {
+    display: block;
+    transition: background-color 150ms;
+}
+.test-card:hover {
+    background: var(--tgui--plain_background);
+}
+.test-card:focus-visible {
+    outline: 2px solid var(--tgui--button_color);
+    outline-offset: -3px;
+    border-radius: 12px;
+}
+.test-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    font-size: 28px;
+    border-radius: 14px;
+    background: var(--tgui--bg_color);
+}
+.test-chevron {
+    font-size: 26px;
+    color: var(--tgui--hint_color);
+}
+@media (max-width: 360px) {
+    .test-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+}

@@ -1,0 +1,22 @@
+.details-section {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--tgui--secondary_bg_color);
+}
+.topic-number {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--tgui--secondary_fill);
+    color: var(--tgui--link_color);
+}
+.how-it-works {
+    margin-top: 20px;
+}
+.detail-actions {
+    margin-top: 24px;
+}
