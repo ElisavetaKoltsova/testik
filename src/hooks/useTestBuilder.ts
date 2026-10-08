@@ -5,6 +5,7 @@ import {
     createDraftOption,
     createDraftQuestion,
     isCustomTestDraft,
+    getDraftValidationError,
 } from '../data';
 import type { CustomTestDraft, DraftQuestion } from '../data';
 
@@ -98,6 +99,16 @@ export function useTestBuilder() {
                   },
         );
 
+    const validateForPreview = () => {
+        const error = getDraftValidationError(draft);
+        if (error) {
+            setFeedback({ kind: 'error', text: error });
+            return false;
+        }
+        setFeedback(null);
+        return true;
+    };
+
     const saveDraft = () => {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
@@ -121,5 +132,6 @@ export function useTestBuilder() {
         addOption,
         removeOption,
         saveDraft,
+        validateForPreview,
     };
 }

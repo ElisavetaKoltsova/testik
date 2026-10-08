@@ -1,4 +1,5 @@
 import type { FormEvent } from 'react';
+import { Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { Button, Input } from '@telegram-apps/telegram-ui';
 import { QuestionEditor } from '../../components';
 import { CUSTOM_TEST_LIMITS } from '../../config';
@@ -17,11 +18,19 @@ export function TestBuilderPage() {
         addOption,
         removeOption,
         saveDraft,
+        validateForPreview,
     } = useTestBuilder();
+    const navigate = useNavigate();
+    const isPreview = useMatch('/create/preview');
+    const handlePreview = () => {
+        if (validateForPreview()) navigate('/create/preview');
+    };
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         saveDraft();
     };
+    if (isPreview) return <Outlet context={{ draft }} />;
+
     return (
         <>
             <header className="builder-header">
@@ -77,6 +86,15 @@ export function TestBuilderPage() {
                     + Добавить вопрос
                 </Button>
                 <div className="builder-save">
+                    <Button
+                        className="rounded-button"
+                        size="l"
+                        mode="outline"
+                        stretched
+                        onClick={handlePreview}
+                    >
+                        Посмотреть тест
+                    </Button>
                     <Button className="rounded-button" size="l" type="submit" stretched>
                         Сохранить черновик
                     </Button>

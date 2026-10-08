@@ -1,0 +1,8 @@
+.preview-finish-icon {
+    font-size: 64px;
+}
+.preview-finish-actions {
+    display: grid;
+    gap: 12px;
+    width: 100%;
+}

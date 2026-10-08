@@ -7,3 +7,4 @@ export {
     isCustomTestDraft,
 } from './customTestDraft';
 export type { CustomTestDraft, DraftQuestion, DraftOption } from './customTestDraft';
+export { getDraftValidationError } from './customTestDraft';
