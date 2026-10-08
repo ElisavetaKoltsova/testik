@@ -14,8 +14,3 @@
     line-height: 1.55;
     color: var(--tgui--hint_color);
 }
-.custom-test-card .custom-test-status {
-    margin-bottom: 0;
-    text-align: center;
-    font-size: 12px;
-}

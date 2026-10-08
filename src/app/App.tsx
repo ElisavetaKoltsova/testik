@@ -3,7 +3,7 @@ import { AppRoot } from '@telegram-apps/telegram-ui';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useTelegram, useTelegramBackButton } from '../hooks';
 import { BackNavigation, BrowserPreview } from '../components';
-import { HomePage, TestDetailsPage, NotFoundPage } from '../pages';
+import { HomePage, TestDetailsPage, NotFoundPage, TestBuilderPage } from '../pages';
 import './App.css';
 
 export default function App() {
@@ -29,6 +29,7 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/tests/:id" element={<TestDetailsPage />} />
+                        <Route path="/create" element={<TestBuilderPage />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                 </div>

@@ -1,0 +1,79 @@
+.builder-header {
+    padding: 8px 0 24px;
+}
+.builder-header .eyebrow {
+    margin-top: 8px;
+}
+.builder-header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+.builder-header > p:last-child {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--tgui--hint_color);
+}
+.test-builder {
+    display: grid;
+    gap: 16px;
+}
+.builder-questions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.builder-questions-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+.builder-questions-header span {
+    font-size: 13px;
+    color: var(--tgui--hint_color);
+}
+.builder-hint {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--tgui--hint_color);
+}
+.builder-questions {
+    display: grid;
+    gap: 20px;
+}
+.builder-save {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+}
+.builder-feedback {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.builder-feedback--info {
+    color: var(--tgui--hint_color);
+}
+.builder-feedback--saved {
+    color: var(--tgui--link_color);
+}
+.builder-feedback--error {
+    color: var(--tgui--destructive_text_color);
+}
+.builder-title-field {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.builder-title-field > label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tgui--hint_color);
+}
+.builder-title-field > div {
+    padding: 0;
+    background: transparent;
+}
+.builder-title-field input {
+    font-size: 16px;
+}

@@ -1,0 +1,69 @@
+.question-editor {
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--tgui--secondary_bg_color);
+}
+.question-editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.question-editor-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+.remove-question,
+.remove-option {
+    color: var(--tgui--destructive_text_color);
+}
+.editor-field {
+    display: grid;
+    gap: 8px;
+}
+.editor-field > label,
+.options-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tgui--hint_color);
+}
+.options-label {
+    margin: 20px 0 8px;
+}
+.editor-options {
+    display: grid;
+    gap: 10px;
+}
+.editor-option {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px;
+    align-items: center;
+    gap: 8px;
+}
+.option-input {
+    min-width: 0;
+}
+.remove-option {
+    min-width: 32px;
+    width: 32px;
+    padding: 0;
+    font-size: 24px;
+}
+.add-option {
+    margin-top: 12px;
+}
+.question-editor textarea {
+    resize: vertical;
+}
+
+/* У полей внутри карточки не нужна отдельная прямоугольная подложка. */
+.question-editor .editor-field > div,
+.editor-option > div {
+    padding: 0;
+    background: transparent;
+}
+.question-editor input,
+.question-editor textarea {
+    font-size: 16px;
+}

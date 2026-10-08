@@ -1,8 +1,10 @@
 import { Button } from '@telegram-apps/telegram-ui';
+import { useNavigate } from 'react-router-dom';
 import { CUSTOM_TEST_LIMITS } from '../../config';
 import './CustomTestCard.css';
 
 export function CustomTestCard() {
+    const navigate = useNavigate();
     return (
         <section className="custom-test-card" aria-labelledby="custom-test-title">
             <h2 id="custom-test-title">А можно придумать свой</h2>
@@ -14,14 +16,10 @@ export function CustomTestCard() {
                 className="rounded-button"
                 size="l"
                 stretched
-                disabled
-                aria-describedby="custom-test-status"
+                onClick={() => navigate('/create')}
             >
                 Создать свой тест
             </Button>
-            <p id="custom-test-status" className="custom-test-status">
-                Конструктор скоро появится
-            </p>
         </section>
     );
 }
