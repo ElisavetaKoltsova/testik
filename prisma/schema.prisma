@@ -1,0 +1,38 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum TestStatus {
+    DRAFT
+    PUBLISHED
+    ARCHIVED
+}
+
+enum TestSource {
+    READY
+    CUSTOM
+}
+
+model PersonalTest {
+    id               String     @id @default(uuid()) @db.Uuid
+    ownerTelegramId  BigInt
+    subjectName      String?    @db.VarChar(100)
+    title            String     @db.VarChar(200)
+    status           TestStatus @default(DRAFT)
+    source           TestSource
+    readyTestId      String?    @db.VarChar(50)
+    readyTestVersion Int?
+    version          Int        @default(1)
+    shareCode        String     @unique @default(uuid()) @db.Uuid
+    content          Json       @db.JsonB
+    createdAt        DateTime   @default(now()) @db.Timestamptz(3)
+    updatedAt        DateTime   @updatedAt @db.Timestamptz(3)
+
+    @@index([ownerTelegramId, createdAt(sort: Desc)])
+    @@map("personal_tests")
+}

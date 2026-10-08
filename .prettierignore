@@ -2,3 +2,5 @@ node_modules/
 dist/
 dist-server/
 package-lock.json
+prisma/schema.prisma
+prisma/migrations/

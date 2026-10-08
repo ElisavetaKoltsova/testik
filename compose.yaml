@@ -6,7 +6,7 @@ services:
         restart: unless-stopped
         environment:
             POSTGRES_USER: ${POSTGRES_USER:-testik}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-testik_local}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the local .env file}
             POSTGRES_DB: ${POSTGRES_DB:-testik}
         ports:
             - '127.0.0.1:${POSTGRES_PORT:-5433}:5432'
