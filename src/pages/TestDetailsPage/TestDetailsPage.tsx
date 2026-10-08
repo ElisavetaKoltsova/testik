@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Cell, Section } from '@telegram-apps/telegram-ui';
 import { Hero } from '../../components/Hero';
 import { readyTests } from '../../data';
+import { formatQuestionCount } from '../../utils';
 import { NotFoundPage } from '../NotFoundPage';
 import './TestDetailsPage.css';
 
@@ -16,9 +17,9 @@ export function TestDetailsPage() {
             <Hero
                 compact
                 emoji={test.emoji}
-                eyebrow={`${test.questionCount} ВОПРОСА · ОКОЛО МИНУТЫ`}
+                eyebrow={formatQuestionCount(test.questions.length).toLocaleUpperCase('ru')}
                 title={test.title}
-                description={test.description}
+                description={test.ownerDescription}
             />
             <Section header="Что ты узнаешь" className="details-section">
                 {test.topics.map((topic, index) => (
@@ -44,7 +45,21 @@ export function TestDetailsPage() {
                 </Cell>
             </Section>
             <div className="detail-actions">
-                <Button className="rounded-button" size="l" stretched onClick={() => navigate('/')}>
+                <Button
+                    className="rounded-button"
+                    size="l"
+                    stretched
+                    onClick={() => navigate(`/tests/${test.id}/preview`)}
+                >
+                    Посмотреть вопросы
+                </Button>
+                <Button
+                    className="rounded-button"
+                    size="l"
+                    stretched
+                    mode="plain"
+                    onClick={() => navigate('/')}
+                >
                     К тестам
                 </Button>
             </div>

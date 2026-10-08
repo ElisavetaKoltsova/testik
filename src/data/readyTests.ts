@@ -1,28 +1,37 @@
-export interface ReadyTest {
+import readyTestsJson from './readyTests.json';
+import type { TestContent, TestOption, TestQuestion } from './testContent';
+
+export interface ReadyTestOption extends TestOption {
+    points: Partial<Record<string, number>>;
+}
+
+export interface ReadyTestQuestion extends TestQuestion {
+    options: ReadyTestOption[];
+}
+
+export interface ReadyTestResult {
     id: string;
     emoji: string;
     title: string;
     description: string;
-    questionCount: number;
-    topics: string[];
 }
 
-export const readyTests: ReadyTest[] = [
-    {
-        id: 'person',
-        emoji: '🪞',
-        title: 'Каким человеком вы меня видите?',
-        description: 'Узнай, какие качества замечают в тебе друзья и что они ценят больше всего.',
-        questionCount: 3,
-        topics: ['Первое впечатление', 'Твои сильные стороны', 'Твоя роль в компании'],
-    },
-    {
-        id: 'vibe',
-        emoji: '✨',
-        title: 'Какой у меня вайб?',
-        description:
-            'Посмотри на свою энергию глазами друзей: какие ощущения и ассоциации ты вызываешь.',
-        questionCount: 3,
-        topics: ['Ассоциации с тобой', 'Твоя энергия', 'Цвет твоего вайба'],
-    },
-];
+export interface ReadyTest extends TestContent {
+    id: string;
+    version: number;
+    emoji: string;
+    ownerDescription: string;
+    participantDescription: string;
+    shareText: string;
+    topics: string[];
+    resultType: 'maxScore';
+    results: ReadyTestResult[];
+    questions: ReadyTestQuestion[];
+}
+
+export const readyTests: ReadyTest[] = readyTestsJson.map((test) => {
+    if (test.resultType !== 'maxScore') {
+        throw new Error(`Неизвестный тип результата теста ${test.id}: ${test.resultType}`);
+    }
+    return { ...test, resultType: test.resultType } satisfies ReadyTest;
+});

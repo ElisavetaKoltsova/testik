@@ -1,0 +1,934 @@
+[
+    {
+        "id": "person",
+        "version": 1,
+        "emoji": "🪞",
+        "title": "Каким человеком вы меня видите?",
+        "ownerDescription": "Отправь тест друзьям и узнай, каким человеком они тебя видят: что замечают первым, за что ценят и какую роль ты обычно занимаешь в компании.",
+        "participantDescription": "Ответь на 10 вопросов о том, каким ты видишь этого человека. Здесь нет правильных ответов — выбирай то, что первым приходит в голову.",
+        "shareText": "Каким человеком ты меня видишь? 👀 Пройди тест и расскажи, какое впечатление я на тебя произвожу.",
+        "topics": [
+            "Первое впечатление",
+            "Характер",
+            "Общение",
+            "Сильные стороны",
+            "Роль в компании"
+        ],
+        "resultType": "maxScore",
+        "results": [
+            {
+                "id": "person-warm",
+                "emoji": "🫶",
+                "title": "Тёплый человек",
+                "description": "Рядом с тобой спокойно быть собой. Люди чувствуют, что ты не осудишь, выслушаешь и поддержишь, даже если не всегда говоришь это вслух."
+            },
+            {
+                "id": "person-charismatic",
+                "emoji": "🔥",
+                "title": "Главный персонаж",
+                "description": "Ты заметный человек. У тебя есть характер, энергия и способность влиять на атмосферу вокруг, даже когда ты специально ничего для этого не делаешь."
+            },
+            {
+                "id": "person-mind",
+                "emoji": "🧠",
+                "title": "Человек, у которого есть ответ",
+                "description": "Тебя воспринимают как умного, наблюдательного и довольно рационального человека. К тебе идут за советом, мнением или свежим взглядом."
+            },
+            {
+                "id": "person-creative",
+                "emoji": "🎨",
+                "title": "Не как все",
+                "description": "В тебе замечают необычность. Это может быть юмор, вкусы, мышление или манера общаться — с тобой редко бывает ощущение «я уже встречал такого человека»."
+            },
+            {
+                "id": "person-mysterious",
+                "emoji": "🌙",
+                "title": "Человек-загадка",
+                "description": "Тебя не получается прочитать за пять минут. Ты открываешься постепенно, и именно поэтому людям особенно интересно узнавать тебя ближе."
+            }
+        ],
+        "questions": [
+            {
+                "id": "person-room",
+                "text": "Я захожу в комнату, где почти никого не знаю. Что, скорее всего, произойдёт?",
+                "options": [
+                    {
+                        "id": "person-room-social",
+                        "text": "Через 15 минут я уже с кем-то болтаю",
+                        "points": {
+                            "person-charismatic": 2,
+                            "person-warm": 1
+                        }
+                    },
+                    {
+                        "id": "person-room-observe",
+                        "text": "Сначала молча изучу всех вокруг",
+                        "points": {
+                            "person-mysterious": 2,
+                            "person-mind": 1
+                        }
+                    },
+                    {
+                        "id": "person-room-one",
+                        "text": "Найду одного человека и буду общаться только с ним",
+                        "points": {
+                            "person-warm": 2,
+                            "person-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "person-room-chaos",
+                        "text": "Каким-то образом окажусь в центре странной истории",
+                        "points": {
+                            "person-creative": 2,
+                            "person-charismatic": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-message",
+                "text": "Какое сообщение от меня выглядит наиболее правдоподобно?",
+                "options": [
+                    {
+                        "id": "person-message-support",
+                        "text": "«Ты как? Только нормально ответь»",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-message-plan",
+                        "text": "«Я придумала план»",
+                        "points": {
+                            "person-mind": 2,
+                            "person-charismatic": 1
+                        }
+                    },
+                    {
+                        "id": "person-message-random",
+                        "text": "«Короче, у меня максимально странная идея...»",
+                        "points": {
+                            "person-creative": 3
+                        }
+                    },
+                    {
+                        "id": "person-message-lore",
+                        "text": "Сообщение на 14 абзацев с неожиданным лором",
+                        "points": {
+                            "person-creative": 2,
+                            "person-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "person-message-seen",
+                        "text": "Я скорее прочитаю и отвечу через три часа",
+                        "points": {
+                            "person-mysterious": 2,
+                            "person-mind": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-problem",
+                "text": "Если у друга всё внезапно идёт по одному месту, что я скорее сделаю?",
+                "options": [
+                    {
+                        "id": "person-problem-hug",
+                        "text": "Буду рядом и дам выговориться",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-problem-solve",
+                        "text": "Начну искать конкретное решение",
+                        "points": {
+                            "person-mind": 3
+                        }
+                    },
+                    {
+                        "id": "person-problem-distract",
+                        "text": "Утащу куда-нибудь, чтобы отвлечься",
+                        "points": {
+                            "person-charismatic": 2,
+                            "person-warm": 1
+                        }
+                    },
+                    {
+                        "id": "person-problem-meme",
+                        "text": "Сначала отправлю мем. Потом будем разбираться",
+                        "points": {
+                            "person-creative": 2,
+                            "person-warm": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-memory",
+                "text": "После знакомства со мной человек скорее всего запомнит...",
+                "options": [
+                    {
+                        "id": "person-memory-energy",
+                        "text": "Мою энергию",
+                        "points": {
+                            "person-charismatic": 3
+                        }
+                    },
+                    {
+                        "id": "person-memory-jokes",
+                        "text": "Мои шутки и странные фразы",
+                        "points": {
+                            "person-creative": 3
+                        }
+                    },
+                    {
+                        "id": "person-memory-care",
+                        "text": "Как комфортно было со мной разговаривать",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-memory-thought",
+                        "text": "Какую-нибудь мысль, которую я сказала",
+                        "points": {
+                            "person-mind": 3
+                        }
+                    },
+                    {
+                        "id": "person-memory-question",
+                        "text": "Ощущение «так, а что вообще у неё в голове?»",
+                        "points": {
+                            "person-mysterious": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-group",
+                "text": "Какую роль я обычно незаметно занимаю в компании?",
+                "options": [
+                    {
+                        "id": "person-group-glue",
+                        "text": "Тот, кто всех склеивает",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-group-leader",
+                        "text": "Тот, кто решает, куда мы вообще идём",
+                        "points": {
+                            "person-charismatic": 3
+                        }
+                    },
+                    {
+                        "id": "person-group-brain",
+                        "text": "Тот, кто внезапно знает ответ",
+                        "points": {
+                            "person-mind": 3
+                        }
+                    },
+                    {
+                        "id": "person-group-chaos",
+                        "text": "Поставщик идей сомнительной гениальности",
+                        "points": {
+                            "person-creative": 3
+                        }
+                    },
+                    {
+                        "id": "person-group-background",
+                        "text": "Сижу тихо, но почему-то всё знаю",
+                        "points": {
+                            "person-mysterious": 2,
+                            "person-mind": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-disagreement",
+                "text": "Как я веду себя, когда с кем-то не согласна?",
+                "options": [
+                    {
+                        "id": "person-disagreement-direct",
+                        "text": "Скажу прямо",
+                        "points": {
+                            "person-charismatic": 2,
+                            "person-mind": 1
+                        }
+                    },
+                    {
+                        "id": "person-disagreement-argue",
+                        "text": "Принесу аргументы, ссылки и, возможно, презентацию",
+                        "points": {
+                            "person-mind": 3
+                        }
+                    },
+                    {
+                        "id": "person-disagreement-soft",
+                        "text": "Постараюсь сказать максимально аккуратно",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-disagreement-sarcasm",
+                        "text": "Моя позиция станет понятна по одной шутке",
+                        "points": {
+                            "person-creative": 2,
+                            "person-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "person-disagreement-silent",
+                        "text": "Ничего не скажу, но лицо всё расскажет",
+                        "points": {
+                            "person-mysterious": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-superpower",
+                "text": "Если бы у меня была социальная суперспособность, какая?",
+                "options": [
+                    {
+                        "id": "person-superpower-trust",
+                        "text": "Люди почему-то быстро начинают мне доверять",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-superpower-convince",
+                        "text": "Убедить всех, что моя идея реально хорошая",
+                        "points": {
+                            "person-charismatic": 3
+                        }
+                    },
+                    {
+                        "id": "person-superpower-read",
+                        "text": "Замечать то, чего другие не замечают",
+                        "points": {
+                            "person-mind": 2,
+                            "person-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "person-superpower-boring",
+                        "text": "Превратить скучный день в сюжет",
+                        "points": {
+                            "person-creative": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-compliment",
+                "text": "Какой комплимент больше всего похож на то, что могли бы сказать обо мне?",
+                "options": [
+                    {
+                        "id": "person-compliment-kind",
+                        "text": "«С тобой очень комфортно»",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-compliment-interesting",
+                        "text": "«С тобой никогда не скучно»",
+                        "points": {
+                            "person-creative": 2,
+                            "person-charismatic": 1
+                        }
+                    },
+                    {
+                        "id": "person-compliment-smart",
+                        "text": "«Ты реально умная»",
+                        "points": {
+                            "person-mind": 3
+                        }
+                    },
+                    {
+                        "id": "person-compliment-presence",
+                        "text": "«У тебя очень сильная энергетика»",
+                        "points": {
+                            "person-charismatic": 3
+                        }
+                    },
+                    {
+                        "id": "person-compliment-unique",
+                        "text": "«Я вообще не понимаю тебя, но мне нравится»",
+                        "points": {
+                            "person-mysterious": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-movie",
+                "text": "Если бы наша компания была сериалом, какой была бы моя роль?",
+                "options": [
+                    {
+                        "id": "person-movie-main",
+                        "text": "Главный герой",
+                        "points": {
+                            "person-charismatic": 3
+                        }
+                    },
+                    {
+                        "id": "person-movie-favorite",
+                        "text": "Персонаж, которого все любят больше главного героя",
+                        "points": {
+                            "person-warm": 2,
+                            "person-creative": 1
+                        }
+                    },
+                    {
+                        "id": "person-movie-smart",
+                        "text": "Тот самый умный персонаж, который спасает сюжет",
+                        "points": {
+                            "person-mind": 3
+                        }
+                    },
+                    {
+                        "id": "person-movie-weird",
+                        "text": "Странный персонаж с лучшими репликами",
+                        "points": {
+                            "person-creative": 3
+                        }
+                    },
+                    {
+                        "id": "person-movie-lore",
+                        "text": "Персонаж с подозрительно большим скрытым лором",
+                        "points": {
+                            "person-mysterious": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "person-final",
+                "text": "Одним словом: какая я?",
+                "options": [
+                    {
+                        "id": "person-final-reliable",
+                        "text": "Надёжная",
+                        "points": {
+                            "person-warm": 3
+                        }
+                    },
+                    {
+                        "id": "person-final-bright",
+                        "text": "Яркая",
+                        "points": {
+                            "person-charismatic": 3
+                        }
+                    },
+                    {
+                        "id": "person-final-smart",
+                        "text": "Сообразительная",
+                        "points": {
+                            "person-mind": 3
+                        }
+                    },
+                    {
+                        "id": "person-final-unusual",
+                        "text": "Необычная",
+                        "points": {
+                            "person-creative": 3
+                        }
+                    },
+                    {
+                        "id": "person-final-secretive",
+                        "text": "Загадочная",
+                        "points": {
+                            "person-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "person-final-all",
+                        "text": "Да блин, всё сразу",
+                        "points": {
+                            "person-warm": 1,
+                            "person-charismatic": 1,
+                            "person-mind": 1,
+                            "person-creative": 1,
+                            "person-mysterious": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "vibe",
+        "version": 1,
+        "emoji": "✨",
+        "title": "Какой у меня вайб?",
+        "ownerDescription": "Отправь тест друзьям и узнай, с какой атмосферой, эстетикой и энергией ты у них ассоциируешься.",
+        "participantDescription": "Какой вайб у этого человека именно для тебя? Выбирай ассоциации с местами, музыкой, погодой и настроением — долго не думай, первый ответ обычно самый точный.",
+        "shareText": "Какой у меня вайб? ✨ Пройди тест и скажи, с чем я у тебя ассоциируюсь.",
+        "topics": ["Энергия", "Эстетика", "Ассоциации", "Атмосфера", "Первое впечатление"],
+        "resultType": "maxScore",
+        "results": [
+            {
+                "id": "vibe-cozy",
+                "emoji": "☕",
+                "title": "Уютный вайб",
+                "description": "Ты ощущаешься как место, куда хочется возвращаться: тёплый свет, любимая музыка, разговоры ночью и ощущение безопасности."
+            },
+            {
+                "id": "vibe-electric",
+                "emoji": "⚡",
+                "title": "Электрический вайб",
+                "description": "С тобой чувствуется движение. Ты ассоциируешься с яркими эмоциями, спонтанностью и ощущением, что сейчас что-нибудь произойдёт."
+            },
+            {
+                "id": "vibe-dreamy",
+                "emoji": "☁️",
+                "title": "Dreamy вайб",
+                "description": "В тебе есть что-то мягкое, эстетичное и немного нереальное. Будто кадр из фильма, который хочется сохранить в Pinterest."
+            },
+            {
+                "id": "vibe-mysterious",
+                "emoji": "🌌",
+                "title": "Загадочный вайб",
+                "description": "Твоё настроение сложно описать одной фразой. В тебе чувствуется глубина, дистанция и что-то такое, о чём хочется узнать побольше."
+            },
+            {
+                "id": "vibe-chaotic",
+                "emoji": "🪩",
+                "title": "Chaotic good",
+                "description": "Ты — энергия внезапных идей, мемов, странных историй и планов, которые почему-то оказываются лучшими воспоминаниями."
+            }
+        ],
+        "questions": [
+            {
+                "id": "vibe-place",
+                "text": "Если бы мой вайб был местом, где бы мы оказались?",
+                "options": [
+                    {
+                        "id": "vibe-place-cafe",
+                        "text": "В маленьком кафе вечером",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-place-city",
+                        "text": "На ночной улице большого города",
+                        "points": {
+                            "vibe-electric": 2,
+                            "vibe-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-place-roof",
+                        "text": "На крыше под музыку",
+                        "points": {
+                            "vibe-dreamy": 2,
+                            "vibe-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-place-party",
+                        "text": "На тусовке, на которую мы вообще не собирались",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-place-forest",
+                        "text": "Где-то далеко от людей",
+                        "points": {
+                            "vibe-mysterious": 2,
+                            "vibe-dreamy": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-time",
+                "text": "Какое время суток больше всего похоже на меня?",
+                "options": [
+                    {
+                        "id": "vibe-time-morning",
+                        "text": "Раннее солнечное утро",
+                        "points": {
+                            "vibe-cozy": 2,
+                            "vibe-dreamy": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-time-sunset",
+                        "text": "Золотой час перед закатом",
+                        "points": {
+                            "vibe-dreamy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-time-evening",
+                        "text": "Тёплый вечер",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-time-night",
+                        "text": "Глубокая ночь, когда город почти пустой",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-time-3am",
+                        "text": "Три часа ночи и очень сомнительное решение",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-weather",
+                "text": "Какая погода могла бы быть моим характерным саундтреком?",
+                "options": [
+                    {
+                        "id": "vibe-weather-rain",
+                        "text": "Дождь по окну",
+                        "points": {
+                            "vibe-cozy": 2,
+                            "vibe-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-weather-sun",
+                        "text": "Яркое солнце после долгой зимы",
+                        "points": {
+                            "vibe-electric": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-weather-fog",
+                        "text": "Густой туман",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-weather-snow",
+                        "text": "Медленный снег ночью",
+                        "points": {
+                            "vibe-dreamy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-weather-storm",
+                        "text": "Гроза, но мы зачем-то всё равно вышли гулять",
+                        "points": {
+                            "vibe-chaotic": 2,
+                            "vibe-electric": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-song",
+                "text": "Если бы я была песней, в какой момент её бы включали?",
+                "options": [
+                    {
+                        "id": "vibe-song-home",
+                        "text": "Когда едешь домой и хочется спокойствия",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-song-walk",
+                        "text": "Когда идёшь по улице и чувствуешь себя главным героем",
+                        "points": {
+                            "vibe-electric": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-song-window",
+                        "text": "Когда смотришь в окно и драматизируешь жизнь",
+                        "points": {
+                            "vibe-dreamy": 2,
+                            "vibe-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-song-night",
+                        "text": "Когда в два ночи внезапно думаешь о жизни",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-song-chaos",
+                        "text": "Когда творишь какую-то фигню с друзьями",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-color",
+                "text": "Какой цвет первым приходит в голову, если подумать обо мне?",
+                "options": [
+                    {
+                        "id": "vibe-color-cream",
+                        "text": "Молочный или бежевый",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-color-red",
+                        "text": "Красный",
+                        "points": {
+                            "vibe-electric": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-color-pink",
+                        "text": "Пыльно-розовый",
+                        "points": {
+                            "vibe-dreamy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-color-blue",
+                        "text": "Глубокий синий",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-color-neon",
+                        "text": "Какой-нибудь кислотный неон",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-movie",
+                "text": "На какой кадр из фильма похож мой вайб?",
+                "options": [
+                    {
+                        "id": "vibe-movie-kitchen",
+                        "text": "Разговор на кухне поздно вечером",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-movie-car",
+                        "text": "Поездка в машине с громкой музыкой",
+                        "points": {
+                            "vibe-electric": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-movie-window",
+                        "text": "Человек смотрит из окна поезда куда-то вдаль",
+                        "points": {
+                            "vibe-dreamy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-movie-neon",
+                        "text": "Одинокая прогулка по ночному городу",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-movie-run",
+                        "text": "Все куда-то бегут, никто не знает зачем, но очень весело",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-drink",
+                "text": "Если бы мой вайб был напитком, то каким?",
+                "options": [
+                    {
+                        "id": "vibe-drink-cocoa",
+                        "text": "Какао с огромным количеством маршмеллоу",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-drink-energy",
+                        "text": "Энергетик с максимально подозрительным вкусом",
+                        "points": {
+                            "vibe-chaotic": 2,
+                            "vibe-electric": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-drink-matcha",
+                        "text": "Матча со льдом",
+                        "points": {
+                            "vibe-dreamy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-drink-coffee",
+                        "text": "Чёрный кофе ночью",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-drink-soda",
+                        "text": "Очень холодная газировка летом",
+                        "points": {
+                            "vibe-electric": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-notification",
+                "text": "Какое уведомление от меня лучше всего передаёт мой вайб?",
+                "options": [
+                    {
+                        "id": "vibe-notification-care",
+                        "text": "«Ты домой дошёл?»",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-notification-go",
+                        "text": "«Собирайся. Через час выходим»",
+                        "points": {
+                            "vibe-electric": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-notification-song",
+                        "text": "Ссылка на песню без единого объяснения",
+                        "points": {
+                            "vibe-dreamy": 2,
+                            "vibe-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-notification-thought",
+                        "text": "«Мне сейчас такая мысль в голову пришла...»",
+                        "points": {
+                            "vibe-mysterious": 2,
+                            "vibe-dreamy": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-notification-wtf",
+                        "text": "«Только не спрашивай, но...»",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-aesthetic",
+                "text": "Какую эстетику мне проще всего представить?",
+                "options": [
+                    {
+                        "id": "vibe-aesthetic-soft",
+                        "text": "Плед, свечи, книги и тёплый свет",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-aesthetic-city",
+                        "text": "Неон, город, наушники и ночь",
+                        "points": {
+                            "vibe-electric": 2,
+                            "vibe-mysterious": 1
+                        }
+                    },
+                    {
+                        "id": "vibe-aesthetic-cloud",
+                        "text": "Плёнка, облака, цветы и старые фотографии",
+                        "points": {
+                            "vibe-dreamy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-aesthetic-dark",
+                        "text": "Тёмные цвета и ощущение скрытого лора",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-aesthetic-chaos",
+                        "text": "Фото со вспышкой, мемы и 48 открытых вкладок",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "vibe-final",
+                "text": "Какое ощущение остаётся после общения со мной?",
+                "options": [
+                    {
+                        "id": "vibe-final-safe",
+                        "text": "«Было спокойно и хорошо»",
+                        "points": {
+                            "vibe-cozy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-final-energy",
+                        "text": "«У меня теперь почему-то много энергии»",
+                        "points": {
+                            "vibe-electric": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-final-beautiful",
+                        "text": "«Почему это ощущалось как сцена из фильма?»",
+                        "points": {
+                            "vibe-dreamy": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-final-think",
+                        "text": "«Мне теперь есть о чём подумать»",
+                        "points": {
+                            "vibe-mysterious": 3
+                        }
+                    },
+                    {
+                        "id": "vibe-final-story",
+                        "text": "«Ну зато теперь есть что рассказать»",
+                        "points": {
+                            "vibe-chaotic": 3
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

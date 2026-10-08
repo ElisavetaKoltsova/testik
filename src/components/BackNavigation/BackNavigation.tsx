@@ -4,14 +4,15 @@ import './BackNavigation.css';
 
 interface BackNavigationProps {
     to: string;
+    label: string;
 }
 
-export function BackNavigation({ to }: BackNavigationProps) {
+export function BackNavigation({ to, label }: BackNavigationProps) {
     const navigate = useNavigate();
     return (
         <nav className="back-nav" aria-label="Назад">
             <Button mode="plain" size="s" onClick={() => navigate(to)}>
-                {to === '/create' ? '← К редактору' : '← Назад'}
+                {label}
             </Button>
         </nav>
     );

@@ -1,14 +1,16 @@
 import { useEffect, useRef } from 'react';
 import { Button, Radio } from '@telegram-apps/telegram-ui';
-import type { DraftQuestion } from '../../data';
+import type { TestQuestion } from '../../data';
 import './QuestionStep.css';
 
 interface QuestionStepProps {
     title: string;
-    question: DraftQuestion;
+    description?: string;
+    question: TestQuestion;
     number: number;
     total: number;
     selectedOptionId?: string;
+    firstBackLabel: string;
     onSelect: (optionId: string) => void;
     onNext: () => void;
     onBack: () => void;
@@ -16,10 +18,12 @@ interface QuestionStepProps {
 
 export function QuestionStep({
     title,
+    description,
     question,
     number,
     total,
     selectedOptionId,
+    firstBackLabel,
     onSelect,
     onNext,
     onBack,
@@ -34,6 +38,7 @@ export function QuestionStep({
         <section className="question-step">
             <p className="eyebrow">ПРЕДПРОСМОТР</p>
             <p className="preview-test-title">{title}</p>
+            {description && <p className="preview-hint">{description}</p>}
             <div className="question-progress">
                 <span>
                     Вопрос {number} из {total}
@@ -81,7 +86,7 @@ export function QuestionStep({
                     stretched
                     onClick={onBack}
                 >
-                    {number === 1 ? 'К редактору' : 'Назад'}
+                    {number === 1 ? firstBackLabel : 'Назад'}
                 </Button>
                 <Button
                     className="rounded-button"

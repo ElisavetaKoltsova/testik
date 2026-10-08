@@ -20,3 +20,7 @@
 .detail-actions {
     margin-top: 24px;
 }
+.detail-actions {
+    display: grid;
+    gap: 12px;
+}

@@ -1,21 +1,10 @@
 import { CUSTOM_TEST_LIMITS } from '../config';
 
-export interface DraftOption {
-    id: string;
-    text: string;
-}
+import type { TestContent, TestQuestion, TestOption } from './testContent';
 
-export interface DraftQuestion {
-    id: string;
-    text: string;
-    options: DraftOption[];
-}
-
-export interface CustomTestDraft {
-    title: string;
-    questions: DraftQuestion[];
-}
-
+export type DraftOption = TestOption;
+export type DraftQuestion = TestQuestion;
+export type CustomTestDraft = TestContent;
 export function createDraftOption(): DraftOption {
     return { id: crypto.randomUUID(), text: '' };
 }

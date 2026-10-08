@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Cell } from '@telegram-apps/telegram-ui';
 import type { ReadyTest } from '../../data';
+import { formatQuestionCount } from '../../utils';
 import './TestCard.css';
 
 interface TestCardProps {
@@ -23,7 +24,7 @@ export function TestCard({ test }: TestCardProps) {
                         ›
                     </span>
                 }
-                subtitle={`${test.questionCount} вопроса · около минуты`}
+                subtitle={formatQuestionCount(test.questions.length)}
             >
                 {test.title}
             </Cell>
