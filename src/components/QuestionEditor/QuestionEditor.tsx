@@ -46,6 +46,7 @@ export function QuestionEditor({
                 <Textarea
                     id={inputId}
                     rows={2}
+                    maxLength={1000}
                     value={question.text}
                     placeholder="Например: какое качество во мне тебе нравится?"
                     onChange={(event) => onTextChange(event.target.value)}
@@ -60,6 +61,7 @@ export function QuestionEditor({
                         <Input
                             className="option-input"
                             value={option.text}
+                            maxLength={500}
                             placeholder={`Вариант ${index + 1}`}
                             aria-label={`Вопрос ${number}, вариант ${index + 1}`}
                             onChange={(event) => onOptionChange(option.id, event.target.value)}

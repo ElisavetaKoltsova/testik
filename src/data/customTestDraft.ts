@@ -60,12 +60,17 @@ export function isCustomTestDraft(value: unknown): value is CustomTestDraft {
 
 export function getDraftValidationError(draft: CustomTestDraft): string | null {
     if (!isCustomTestDraft(draft)) return 'Проверь количество вопросов и вариантов ответа.';
-    if (!draft.title.trim()) return 'Добавь название теста перед предпросмотром.';
+    if (!draft.title.trim()) return 'Добавь название теста.';
+    if (draft.title.length > 200) return 'Сократи название до 200 символов.';
     for (const [questionIndex, question] of draft.questions.entries()) {
         if (!question.text.trim()) return `Добавь текст вопроса ${questionIndex + 1}.`;
+        if (question.text.length > 1000)
+            return `Сократи вопрос ${questionIndex + 1} до 1000 символов.`;
         for (const [optionIndex, option] of question.options.entries()) {
             if (!option.text.trim())
                 return `Заполни вариант ${optionIndex + 1} у вопроса ${questionIndex + 1}.`;
+            if (option.text.length > 500)
+                return `Сократи вариант ${optionIndex + 1} у вопроса ${questionIndex + 1} до 500 символов.`;
         }
     }
     return null;

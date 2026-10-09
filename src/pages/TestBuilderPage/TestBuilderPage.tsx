@@ -1,9 +1,9 @@
 import type { FormEvent } from 'react';
 import { Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { Button, Input } from '@telegram-apps/telegram-ui';
-import { QuestionEditor } from '../../components';
+import { QuestionEditor, ServerTestSave } from '../../components';
 import { CUSTOM_TEST_LIMITS } from '../../config';
-import { useTestBuilder } from '../../hooks';
+import { useTestBuilder, useServerTestSave } from '../../hooks';
 import './TestBuilderPage.css';
 
 export function TestBuilderPage() {
@@ -20,6 +20,7 @@ export function TestBuilderPage() {
         saveDraft,
         validateForPreview,
     } = useTestBuilder();
+    const serverSave = useServerTestSave(draft);
     const navigate = useNavigate();
     const isPreview = useMatch('/create/preview');
     const handlePreview = () => {
@@ -28,6 +29,11 @@ export function TestBuilderPage() {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         saveDraft();
+    };
+    const handleServerSave = () => {
+        if (serverSave.saving || !validateForPreview()) return;
+        saveDraft();
+        void serverSave.save();
     };
     if (isPreview) return <Outlet context={{ draft }} />;
 
@@ -44,6 +50,7 @@ export function TestBuilderPage() {
                     <Input
                         id="test-title"
                         value={draft.title}
+                        maxLength={200}
                         placeholder="Например: насколько хорошо ты меня знаешь?"
                         onChange={(event) => setTitle(event.target.value)}
                     />
@@ -110,6 +117,12 @@ export function TestBuilderPage() {
                             {feedback.text}
                         </p>
                     )}
+                    <ServerTestSave
+                        saving={serverSave.saving}
+                        message={serverSave.message}
+                        isError={serverSave.isError}
+                        onSave={handleServerSave}
+                    />
                 </div>
             </form>
         </>

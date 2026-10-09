@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import { healthRoutes } from './routes/health/index.js';
 import { currentUserRoutes } from './routes/currentUser/index.js';
+import { personalTestRoutes } from './routes/personalTests/index.js';
 import type { PrismaClient } from '@prisma/client';
 
 interface AppOptions {
@@ -25,6 +26,7 @@ export function buildApp({ logger = false, database, botToken }: AppOptions = {}
     }
     app.register(healthRoutes, { prefix: '/api' });
     app.register(currentUserRoutes, { prefix: '/api', botToken });
+    app.register(personalTestRoutes, { prefix: '/api', botToken });
     return app;
 }
 
