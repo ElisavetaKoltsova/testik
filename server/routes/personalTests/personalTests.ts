@@ -75,11 +75,21 @@ export const personalTestRoutes: FastifyPluginAsync<PersonalTestsOptions> = asyn
                         source: 'CUSTOM',
                         status: 'DRAFT',
                     },
-                    select: { id: true, title: true, content: true },
+                    select: { id: true, title: true, subjectName: true, content: true },
                 });
                 if (!test) return reply.code(404).send({ error: 'Тест не найден.' });
-                const content = test.content as { questions?: unknown } | null;
-                const draft = parseCustomTest({ title: test.title, questions: content?.questions });
+                const content = test.content as {
+                    questions?: unknown;
+                    mode?: unknown;
+                    results?: unknown;
+                } | null;
+                const draft = parseCustomTest({
+                    title: test.title,
+                    subjectName: test.subjectName ?? undefined,
+                    questions: content?.questions,
+                    mode: content?.mode,
+                    results: content?.results,
+                });
                 if (!draft) throw new Error('Invalid stored test');
                 return { id: test.id, draft };
             } catch {
@@ -93,7 +103,7 @@ export const personalTestRoutes: FastifyPluginAsync<PersonalTestsOptions> = asyn
     app.put<{ Params: { id: string }; Body: unknown }>(
         '/tests/:id',
         {
-            bodyLimit: 128 * 1024,
+            bodyLimit: 256 * 1024,
             preHandler: requireTelegramUser(options.botToken),
         },
         async (request, reply) => {
@@ -110,7 +120,7 @@ export const personalTestRoutes: FastifyPluginAsync<PersonalTestsOptions> = asyn
             const input = parseCustomTest(request.body);
             if (!input)
                 return reply.code(400).send({
-                    error: 'Заполни название, 1–10 вопросов и 2–6 ответов в каждом. Проверь длину текстов.',
+                    error: 'Проверь название, вопросы, правильные ответы, баллы и диапазоны результатов.',
                 });
             const database = app.database;
             if (!database)
@@ -120,6 +130,11 @@ export const personalTestRoutes: FastifyPluginAsync<PersonalTestsOptions> = asyn
 
             try {
                 const ownerTelegramId = BigInt(user.id);
+                const content = {
+                    questions: input.questions,
+                    ...(input.mode ? { mode: input.mode } : {}),
+                    ...(input.results ? { results: input.results } : {}),
+                };
                 // Дополнительные условия запрещают обновлять чужой или опубликованный тест.
                 const saved = await database.personalTest.upsert({
                     where: {
@@ -132,10 +147,15 @@ export const personalTestRoutes: FastifyPluginAsync<PersonalTestsOptions> = asyn
                         id: request.params.id,
                         ownerTelegramId,
                         title: input.title,
+                        subjectName: input.subjectName ?? null,
                         source: 'CUSTOM',
-                        content: { questions: input.questions },
+                        content,
                     },
-                    update: { title: input.title, content: { questions: input.questions } },
+                    update: {
+                        title: input.title,
+                        subjectName: input.subjectName ?? null,
+                        content,
+                    },
                     select: { id: true, updatedAt: true },
                 });
                 return { id: saved.id, savedAt: saved.updatedAt.toISOString() };

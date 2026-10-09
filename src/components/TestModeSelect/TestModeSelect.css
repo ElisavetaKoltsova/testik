@@ -1,0 +1,22 @@
+.test-mode-select {
+    display: grid;
+    gap: 8px;
+}
+.test-mode-select > label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tgui--hint_color);
+}
+.test-mode-select > div {
+    padding: 0;
+    background: transparent;
+}
+.test-mode-select select {
+    font-size: 16px;
+}
+.test-mode-select p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--tgui--hint_color);
+}

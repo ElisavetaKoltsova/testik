@@ -1,0 +1,10 @@
+.option-score-select {
+    min-width: 0;
+}
+.option-score-select select {
+    font-size: 16px;
+    padding: 12px 32px 12px 10px;
+}
+.option-score-select > svg {
+    right: 8px;
+}

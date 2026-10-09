@@ -6,8 +6,10 @@ import {
     createDraftQuestion,
     isCustomTestDraft,
     getDraftValidationError,
+    normalizeCustomTestDraft,
+    getCustomTestMaximum,
 } from '../data';
-import type { CustomTestDraft, DraftQuestion } from '../data';
+import type { CustomTestDraft, CustomTestMode, DraftQuestion, DraftResult } from '../data';
 
 const STORAGE_KEY = 'testik.custom-test-draft.v1';
 
@@ -18,7 +20,9 @@ interface Feedback {
 
 export function useTestBuilder(initial?: { id: string; draft: CustomTestDraft }) {
     const [testId, setTestId] = useState(() => initial?.id ?? crypto.randomUUID());
-    const [draft, setDraft] = useState(() => initial?.draft ?? createCustomTestDraft());
+    const [draft, setDraft] = useState(() =>
+        initial ? normalizeCustomTestDraft(initial.draft) : createCustomTestDraft(),
+    );
     const [feedback, setFeedback] = useState<Feedback | null>(null);
     const [hasLocalDraft, setHasLocalDraft] = useState(() => {
         try {
@@ -32,7 +36,7 @@ export function useTestBuilder(initial?: { id: string; draft: CustomTestDraft })
         try {
             const saved: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
             if (isCustomTestDraft(saved)) {
-                setDraft(saved);
+                setDraft(normalizeCustomTestDraft(saved));
                 setTestId(crypto.randomUUID());
             } else if (
                 typeof saved === 'object' &&
@@ -43,7 +47,7 @@ export function useTestBuilder(initial?: { id: string; draft: CustomTestDraft })
                 typeof saved.id === 'string' &&
                 /^[a-f\d]{8}-[a-f\d]{4}-4[a-f\d]{3}-[89ab][a-f\d]{3}-[a-f\d]{12}$/i.test(saved.id)
             ) {
-                setDraft(saved.draft);
+                setDraft(normalizeCustomTestDraft(saved.draft));
                 setTestId(saved.id);
             } else throw new Error('Invalid draft');
             setFeedback({ kind: 'info', text: 'Открыт локальный черновик.' });
@@ -67,6 +71,49 @@ export function useTestBuilder(initial?: { id: string; draft: CustomTestDraft })
     };
 
     const setTitle = (title: string) => updateDraft((current) => ({ ...current, title }));
+    const setMode = (mode: CustomTestMode) => updateDraft((current) => ({ ...current, mode }));
+    const setCorrectOption = (questionId: string, optionId: string) =>
+        updateQuestion(questionId, (question) => ({ ...question, correctOptionId: optionId }));
+    const setOptionScore = (questionId: string, optionId: string, score: number) =>
+        updateQuestion(questionId, (question) => ({
+            ...question,
+            options: question.options.map((option) =>
+                option.id === optionId ? { ...option, score } : option,
+            ),
+        }));
+    const addResult = () =>
+        updateDraft((current) => {
+            const results = current.results ?? [];
+            if (results.length >= 5) return current;
+            const minScore = results.length
+                ? Math.min(50, Math.max(...results.map((result) => result.maxScore)) + 1)
+                : 0;
+            return {
+                ...current,
+                results: [
+                    ...results,
+                    {
+                        id: crypto.randomUUID(),
+                        title: '',
+                        description: '',
+                        minScore,
+                        maxScore: Math.max(minScore, getCustomTestMaximum(current)),
+                    },
+                ],
+            };
+        });
+    const updateResult = (id: string, patch: Partial<Omit<DraftResult, 'id'>>) =>
+        updateDraft((current) => ({
+            ...current,
+            results: current.results?.map((result) =>
+                result.id === id ? { ...result, ...patch } : result,
+            ),
+        }));
+    const removeResult = (id: string) =>
+        updateDraft((current) => ({
+            ...current,
+            results: current.results?.filter((result) => result.id !== id),
+        }));
     const addQuestion = () =>
         updateDraft((current) =>
             current.questions.length >= CUSTOM_TEST_LIMITS.maxQuestions
@@ -103,6 +150,10 @@ export function useTestBuilder(initial?: { id: string; draft: CustomTestDraft })
                 ? question
                 : {
                       ...question,
+                      correctOptionId:
+                          question.correctOptionId === optionId
+                              ? undefined
+                              : question.correctOptionId,
                       options: question.options.filter((option) => option.id !== optionId),
                   },
         );
@@ -137,6 +188,12 @@ export function useTestBuilder(initial?: { id: string; draft: CustomTestDraft })
         hasLocalDraft,
         restoreDraft,
         setTitle,
+        setMode,
+        setCorrectOption,
+        setOptionScore,
+        addResult,
+        updateResult,
+        removeResult,
         addQuestion,
         removeQuestion,
         setQuestionText,

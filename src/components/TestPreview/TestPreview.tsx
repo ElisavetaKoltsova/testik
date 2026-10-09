@@ -69,19 +69,21 @@ export function TestPreview({
             setStep((current) => current + 1);
     };
     return (
-        <QuestionStep
-            title={content.title}
-            description={step === 0 ? description : undefined}
-            question={question}
-            number={step + 1}
-            total={content.questions.length}
-            selectedOptionId={answers[question.id]}
-            firstBackLabel={firstBackLabel}
-            onSelect={(optionId) =>
-                setAnswers((current) => ({ ...current, [question.id]: optionId }))
-            }
-            onNext={goNext}
-            onBack={() => (step > 0 ? setStep((current) => current - 1) : navigate(returnTo))}
-        />
+        <>
+            <QuestionStep
+                title={content.title}
+                description={step === 0 ? description : undefined}
+                question={question}
+                number={step + 1}
+                total={content.questions.length}
+                selectedOptionId={answers[question.id]}
+                firstBackLabel={firstBackLabel}
+                onSelect={(optionId) =>
+                    setAnswers((current) => ({ ...current, [question.id]: optionId }))
+                }
+                onNext={goNext}
+                onBack={() => (step > 0 ? setStep((current) => current - 1) : navigate(returnTo))}
+            />
+        </>
     );
 }

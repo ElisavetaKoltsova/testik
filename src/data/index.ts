@@ -6,7 +6,15 @@ export {
     createDraftOption,
     createDraftQuestion,
     isCustomTestDraft,
+    normalizeCustomTestDraft,
 } from './customTestDraft';
-export type { CustomTestDraft, DraftQuestion, DraftOption } from './customTestDraft';
+export type {
+    CustomTestDraft,
+    CustomTestMode,
+    DraftResult,
+    DraftQuestion,
+    DraftOption,
+} from './customTestDraft';
+export { getCustomTestMaximum, getCustomTestScore, getCustomTestResult } from './customTestScoring';
 export { getDraftValidationError } from './customTestDraft';
 export type { TestContent, TestQuestion, TestOption } from './testContent';

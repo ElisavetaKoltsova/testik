@@ -1,4 +1,4 @@
-import { getDraftValidationError, isCustomTestDraft } from '../data';
+import { isCustomTestDraft, normalizeCustomTestDraft } from '../data';
 import type { CustomTestDraft } from '../data';
 
 export interface PersonalTestSummary {
@@ -69,11 +69,10 @@ export async function getPersonalTest(id: string, signal: AbortSignal): Promise<
         !('id' in payload) ||
         payload.id !== id ||
         !('draft' in payload) ||
-        !isCustomTestDraft(payload.draft) ||
-        getDraftValidationError(payload.draft)
+        !isCustomTestDraft(payload.draft)
     )
         throw new Error('Не удалось прочитать тест.');
-    return { id, draft: payload.draft };
+    return { id, draft: normalizeCustomTestDraft(payload.draft) };
 }
 
 export async function saveCustomTest(
@@ -94,7 +93,7 @@ export async function saveCustomTest(
     if (response.status === 401) throw new Error('Открой приложение заново через Telegram.');
     if (response.status === 409) throw new Error('Этот тест недоступен для редактирования.');
     if (response.status === 400 || response.status === 413)
-        throw new Error('Проверь вопросы, варианты и длину текстов.');
+        throw new Error('Проверь вопросы, ответы, баллы и диапазоны результатов.');
     if (!response.ok) throw new Error('Не удалось сохранить тест. Попробуй ещё раз.');
     const payload: unknown = await response.json();
     if (

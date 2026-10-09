@@ -44,6 +44,10 @@ test('Save endpoint validates input, takes owner only from Telegram and strips r
             { ...validBody(), status: 'PUBLISHED' },
             { ...validBody(), title: ' ' },
             { ...validBody(), title: 'x'.repeat(201) },
+            ...[null, 42, false, [], {}, 'x'.repeat(101)].map((subjectName) => ({
+                ...validBody(),
+                subjectName,
+            })),
             { ...validBody(), questions: [] },
             {
                 ...validBody(),
@@ -157,7 +161,7 @@ test('Save endpoint validates input, takes owner only from Telegram and strips r
             method: 'PUT',
             url: `/api/tests/${id}`,
             headers,
-            payload: JSON.stringify({ ...validBody(), title: 'x'.repeat(140000) }),
+            payload: JSON.stringify({ ...validBody(), title: 'x'.repeat(300000) }),
         });
         assert.equal(tooLarge.statusCode, 413);
         const response = await app.inject({
@@ -185,6 +189,19 @@ test('Save endpoint validates input, takes owner only from Telegram and strips r
         assert.equal(call.create.title, 'Свой тест');
         assert.equal(call.create.content.questions[0].text, 'Вопрос?');
         assert.equal(call.create.content.questions[0].options[0].text, 'Да');
+        const withName = await app.inject({
+            method: 'PUT',
+            url: `/api/tests/${id}`,
+            headers,
+            payload: { ...validBody(), subjectName: '  Аня  ' },
+        });
+        assert.equal(withName.statusCode, 200);
+        const namedCall = upsert.mock.calls[1].arguments[0] as unknown as {
+            create: { subjectName: string };
+            update: { subjectName: string };
+        };
+        assert.equal(namedCall.create.subjectName, 'Аня');
+        assert.equal(namedCall.update.subjectName, 'Аня');
     } finally {
         await app.close();
     }

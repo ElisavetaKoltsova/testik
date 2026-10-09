@@ -11,3 +11,7 @@ export { ApiStatus } from './ApiStatus';
 export { ServerTestSave } from './ServerTestSave';
 export { TestEditor } from './TestEditor';
 export { PersonalTestCard } from './PersonalTestCard';
+export { TestModeSelect } from './TestModeSelect';
+export { OptionScoreSelect } from './OptionScoreSelect';
+export { TestResultsEditor } from './TestResultsEditor';
+export { CustomTestResult } from './CustomTestResult';

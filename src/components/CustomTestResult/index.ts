@@ -1,0 +1,1 @@
+export { CustomTestResult } from './CustomTestResult';

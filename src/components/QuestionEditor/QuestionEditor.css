@@ -37,7 +37,7 @@
 }
 .editor-option {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 32px;
+    grid-template-columns: minmax(0, 1fr) 88px 32px;
     align-items: center;
     gap: 8px;
 }
@@ -55,6 +55,25 @@
 }
 .question-editor textarea {
     resize: vertical;
+}
+.correct-option-choice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--tgui--hint_color);
+    cursor: pointer;
+}
+@media (max-width: 360px) {
+    .editor-option {
+        grid-template-columns: minmax(0, 1fr) 74px 24px;
+        gap: 4px;
+    }
+    .remove-option {
+        min-width: 24px;
+        width: 24px;
+    }
 }
 
 /* У полей внутри карточки не нужна отдельная прямоугольная подложка. */

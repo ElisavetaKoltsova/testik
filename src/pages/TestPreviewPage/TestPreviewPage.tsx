@@ -1,6 +1,6 @@
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Button, Placeholder } from '@telegram-apps/telegram-ui';
-import { TestPreview } from '../../components';
+import { CustomTestResult, TestPreview } from '../../components';
 import { getDraftValidationError } from '../../data';
 import type { CustomTestDraft } from '../../data';
 
@@ -25,6 +25,7 @@ export function TestPreviewPage() {
             returnTo={editorPath}
             returnLabel="К редактированию"
             firstBackLabel="К редактору"
+            renderResult={(answers) => <CustomTestResult draft={draft} answers={answers} />}
         />
     );
 }

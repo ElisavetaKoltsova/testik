@@ -43,14 +43,19 @@ test('Saving twice updates one owned draft in real PostgreSQL', async () => {
                         method: 'PUT',
                         url: `/api/tests/${id}`,
                         headers,
-                        payload: body,
+                        payload: { ...body, subjectName: '  Аня  ' },
                     });
                     assert.equal(first.statusCode, 200);
+                    assert.equal(
+                        (await transaction.personalTest.findUniqueOrThrow({ where: { id } }))
+                            .subjectName,
+                        'Аня',
+                    );
                     const second = await app.inject({
                         method: 'PUT',
                         url: `/api/tests/${id}`,
                         headers,
-                        payload: { ...body, title: 'Обновлённый тест' },
+                        payload: { ...body, title: 'Обновлённый тест', subjectName: 'Маша' },
                     });
                     assert.equal(second.statusCode, 200);
                     assert.equal(await transaction.personalTest.count({ where: { id } }), 1);
@@ -60,6 +65,7 @@ test('Saving twice updates one owned draft in real PostgreSQL', async () => {
                     assert.equal(saved.ownerTelegramId, 42n);
                     assert.equal(saved.status, 'DRAFT');
                     assert.equal(saved.title, 'Обновлённый тест');
+                    assert.equal(saved.subjectName, 'Маша');
                     assert.deepEqual(saved.content, { questions: body.questions });
                     const detail = await app.inject({
                         method: 'GET',
@@ -69,7 +75,7 @@ test('Saving twice updates one owned draft in real PostgreSQL', async () => {
                     assert.equal(detail.statusCode, 200);
                     assert.deepEqual(detail.json(), {
                         id,
-                        draft: { ...body, title: 'Обновлённый тест' },
+                        draft: { ...body, title: 'Обновлённый тест', subjectName: 'Маша' },
                     });
                     const foreignDetail = await app.inject({
                         method: 'GET',
@@ -77,6 +83,24 @@ test('Saving twice updates one owned draft in real PostgreSQL', async () => {
                         headers: { authorization: testTelegramAuthorization(43) },
                     });
                     assert.equal(foreignDetail.statusCode, 404);
+                    const cleared = await app.inject({
+                        method: 'PUT',
+                        url: `/api/tests/${id}`,
+                        headers,
+                        payload: { ...body, subjectName: '   ' },
+                    });
+                    assert.equal(cleared.statusCode, 200);
+                    assert.equal(
+                        (await transaction.personalTest.findUniqueOrThrow({ where: { id } }))
+                            .subjectName,
+                        null,
+                    );
+                    const withoutName = await app.inject({
+                        method: 'GET',
+                        url: `/api/tests/${id}`,
+                        headers,
+                    });
+                    assert.deepEqual(withoutName.json(), { id, draft: body });
                 } finally {
                     await app.close();
                 }

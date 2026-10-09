@@ -1,5 +1,6 @@
-import { Button, Input, Textarea } from '@telegram-apps/telegram-ui';
-import type { DraftQuestion } from '../../data';
+import { Button, Input, Radio, Textarea } from '@telegram-apps/telegram-ui';
+import type { CustomTestMode, DraftQuestion } from '../../data';
+import { OptionScoreSelect } from '../OptionScoreSelect';
 import { CUSTOM_TEST_LIMITS } from '../../config';
 import './QuestionEditor.css';
 
@@ -7,6 +8,9 @@ interface QuestionEditorProps {
     question: DraftQuestion;
     number: number;
     canRemove: boolean;
+    mode: CustomTestMode;
+    onCorrectOptionChange: (optionId: string) => void;
+    onScoreChange: (optionId: string, score: number) => void;
     onTextChange: (text: string) => void;
     onOptionChange: (optionId: string, text: string) => void;
     onAddOption: () => void;
@@ -18,6 +22,9 @@ export function QuestionEditor({
     question,
     number,
     canRemove,
+    mode,
+    onCorrectOptionChange,
+    onScoreChange,
     onTextChange,
     onOptionChange,
     onAddOption,
@@ -48,7 +55,7 @@ export function QuestionEditor({
                     rows={2}
                     maxLength={1000}
                     value={question.text}
-                    placeholder="Например: какое качество во мне тебе нравится?"
+                    placeholder="Например: какая планета ближе всего к Солнцу?"
                     onChange={(event) => onTextChange(event.target.value)}
                 />
             </div>
@@ -66,6 +73,25 @@ export function QuestionEditor({
                             aria-label={`Вопрос ${number}, вариант ${index + 1}`}
                             onChange={(event) => onOptionChange(option.id, event.target.value)}
                         />
+                        {mode === 'quiz' ? (
+                            <div className="correct-option-choice">
+                                <Radio
+                                    id={`correct-option-${option.id}`}
+                                    name={`correct-${question.id}`}
+                                    value={option.id}
+                                    checked={question.correctOptionId === option.id}
+                                    aria-label={`Правильный ответ: вопрос ${number}, вариант ${index + 1}`}
+                                    onChange={() => onCorrectOptionChange(option.id)}
+                                />
+                                <label htmlFor={`correct-option-${option.id}`}>Верный</label>
+                            </div>
+                        ) : (
+                            <OptionScoreSelect
+                                value={option.score ?? 0}
+                                label={`Баллы: вопрос ${number}, вариант ${index + 1}`}
+                                onChange={(score) => onScoreChange(option.id, score)}
+                            />
+                        )}
                         <Button
                             className="remove-option"
                             size="s"

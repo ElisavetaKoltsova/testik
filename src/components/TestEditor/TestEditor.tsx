@@ -3,6 +3,9 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Input } from '@telegram-apps/telegram-ui';
 import { QuestionEditor } from '../QuestionEditor';
 import { ServerTestSave } from '../ServerTestSave';
+import { TestModeSelect } from '../TestModeSelect';
+import { TestResultsEditor } from '../TestResultsEditor';
+import { getCustomTestMaximum } from '../../data';
 import type { PersonalTestDraft } from '../../api';
 import { CUSTOM_TEST_LIMITS } from '../../config';
 import { useTestBuilder, useServerTestSave } from '../../hooks';
@@ -16,6 +19,12 @@ export function TestEditor({ initial }: { initial?: PersonalTestDraft }) {
         restoreDraft,
         feedback,
         setTitle,
+        setMode,
+        setCorrectOption,
+        setOptionScore,
+        addResult,
+        updateResult,
+        removeResult,
         addQuestion,
         removeQuestion,
         setQuestionText,
@@ -49,9 +58,9 @@ export function TestEditor({ initial }: { initial?: PersonalTestDraft }) {
             <header className="builder-header">
                 <p className="eyebrow">КОНСТРУКТОР</p>
                 <h1>{initial ? 'Редактировать тест' : 'Свой тест'}</h1>
-                <p>Придумай вопросы, на которые интересно услышать ответы друзей.</p>
+                <p>Придумай вопросы, варианты ответов и настрой подсчёт результата.</p>
             </header>
-            <form className="test-builder" onSubmit={handleSubmit}>
+            <form className="test-builder" noValidate onSubmit={handleSubmit}>
                 <fieldset className="editor-fields" disabled={serverSave.saving}>
                     {!initial && hasLocalDraft && (
                         <Button
@@ -70,10 +79,11 @@ export function TestEditor({ initial }: { initial?: PersonalTestDraft }) {
                             id="test-title"
                             value={draft.title}
                             maxLength={200}
-                            placeholder="Например: насколько хорошо ты меня знаешь?"
+                            placeholder="Например: насколько хорошо ты знаешь кино?"
                             onChange={(event) => setTitle(event.target.value)}
                         />
                     </div>
+                    <TestModeSelect mode={draft.mode ?? 'quiz'} onChange={setMode} />
                     <div className="builder-questions-header">
                         <h2>Вопросы</h2>
                         <span>
@@ -92,6 +102,13 @@ export function TestEditor({ initial }: { initial?: PersonalTestDraft }) {
                                 question={question}
                                 number={index + 1}
                                 canRemove={draft.questions.length > 1}
+                                mode={draft.mode ?? 'quiz'}
+                                onCorrectOptionChange={(optionId) =>
+                                    setCorrectOption(question.id, optionId)
+                                }
+                                onScoreChange={(optionId, score) =>
+                                    setOptionScore(question.id, optionId, score)
+                                }
                                 onTextChange={(text) => setQuestionText(question.id, text)}
                                 onOptionChange={(optionId, text) =>
                                     setOptionText(question.id, optionId, text)
@@ -112,6 +129,13 @@ export function TestEditor({ initial }: { initial?: PersonalTestDraft }) {
                     >
                         + Добавить вопрос
                     </Button>
+                    <TestResultsEditor
+                        results={draft.results ?? []}
+                        maximum={getCustomTestMaximum(draft)}
+                        onAdd={addResult}
+                        onChange={updateResult}
+                        onRemove={removeResult}
+                    />
                     <div className="builder-save">
                         <Button
                             className="rounded-button"

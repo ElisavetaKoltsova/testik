@@ -1,0 +1,19 @@
+.custom-test-result {
+    margin: 24px 0;
+}
+.custom-test-result h1 {
+    margin: 0 0 16px;
+    font-size: 28px;
+    overflow-wrap: anywhere;
+}
+.custom-test-score {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--tgui--link_color);
+}
+.custom-result-description {
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}

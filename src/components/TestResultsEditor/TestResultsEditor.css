@@ -1,0 +1,55 @@
+.test-results-editor,
+.result-editor-card {
+    display: grid;
+    gap: 12px;
+    min-width: 0;
+}
+.test-results-editor {
+    margin-top: 12px;
+}
+.test-results-editor h2 {
+    margin: 0;
+    font-size: 20px;
+}
+.result-editor-card {
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--tgui--secondary_bg_color);
+}
+.result-editor-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+.result-editor-heading h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.remove-result {
+    color: var(--tgui--destructive_text_color);
+}
+.result-editor-card label {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--tgui--hint_color);
+}
+.result-editor-card > div:not(.result-editor-heading):not(.result-score-range),
+.result-score-range > div > div {
+    padding: 0;
+    background: transparent;
+}
+.result-editor-card input,
+.result-editor-card textarea {
+    font-size: 16px;
+}
+.result-score-range {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+}
+.result-score-range > div {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+}
