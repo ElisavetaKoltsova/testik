@@ -61,6 +61,22 @@ test('Saving twice updates one owned draft in real PostgreSQL', async () => {
                     assert.equal(saved.status, 'DRAFT');
                     assert.equal(saved.title, 'Обновлённый тест');
                     assert.deepEqual(saved.content, { questions: body.questions });
+                    const detail = await app.inject({
+                        method: 'GET',
+                        url: `/api/tests/${id}`,
+                        headers,
+                    });
+                    assert.equal(detail.statusCode, 200);
+                    assert.deepEqual(detail.json(), {
+                        id,
+                        draft: { ...body, title: 'Обновлённый тест' },
+                    });
+                    const foreignDetail = await app.inject({
+                        method: 'GET',
+                        url: `/api/tests/${id}`,
+                        headers: { authorization: testTelegramAuthorization(43) },
+                    });
+                    assert.equal(foreignDetail.statusCode, 404);
                 } finally {
                     await app.close();
                 }
@@ -94,6 +110,12 @@ for (const protection of ['foreign', 'published', 'ready'] as const) {
                     });
                     const app = appForTransaction(transaction);
                     try {
+                        const detail = await app.inject({
+                            method: 'GET',
+                            url: `/api/tests/${id}`,
+                            headers: { authorization: testTelegramAuthorization(42) },
+                        });
+                        assert.equal(detail.statusCode, 404);
                         const response = await app.inject({
                             method: 'PUT',
                             url: `/api/tests/${id}`,

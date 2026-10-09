@@ -1,0 +1,26 @@
+.my-tests,
+.personal-tests-list {
+    display: grid;
+    gap: 16px;
+}
+.my-tests-header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+.my-tests-header > p:last-child {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--tgui--hint_color);
+}
+.my-tests-success {
+    margin: 0;
+    font-size: 14px;
+    color: var(--tgui--link_color);
+}
+.my-tests-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 13px;
+}

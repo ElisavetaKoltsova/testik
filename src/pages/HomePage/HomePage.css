@@ -10,3 +10,6 @@
     line-height: 1.55;
     color: var(--tgui--hint_color);
 }
+.my-tests-button {
+    margin-top: 16px;
+}

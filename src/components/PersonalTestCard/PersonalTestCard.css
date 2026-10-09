@@ -1,0 +1,18 @@
+.personal-test-card {
+    display: grid;
+    gap: 12px;
+    padding: 20px;
+    border-radius: 16px;
+    background: var(--tgui--secondary_bg_color);
+}
+.personal-test-card h2 {
+    margin: 0;
+    font-size: 20px;
+    overflow-wrap: anywhere;
+}
+.personal-test-status,
+.personal-test-date {
+    margin: 0;
+    font-size: 13px;
+    color: var(--tgui--hint_color);
+}

@@ -9,3 +9,5 @@ export { TestPreview } from './TestPreview';
 export { TestResult } from './TestResult';
 export { ApiStatus } from './ApiStatus';
 export { ServerTestSave } from './ServerTestSave';
+export { TestEditor } from './TestEditor';
+export { PersonalTestCard } from './PersonalTestCard';

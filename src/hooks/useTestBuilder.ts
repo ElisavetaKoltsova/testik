@@ -16,33 +16,41 @@ interface Feedback {
     text: string;
 }
 
-function loadDraft(): { draft: CustomTestDraft; feedback: Feedback | null } {
-    try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-            const saved: unknown = JSON.parse(raw);
-            if (!isCustomTestDraft(saved)) throw new Error('Invalid draft');
-            return {
-                draft: saved,
-                feedback: { kind: 'info', text: 'Продолжим сохранённый черновик.' },
-            };
+export function useTestBuilder(initial?: { id: string; draft: CustomTestDraft }) {
+    const [testId, setTestId] = useState(() => initial?.id ?? crypto.randomUUID());
+    const [draft, setDraft] = useState(() => initial?.draft ?? createCustomTestDraft());
+    const [feedback, setFeedback] = useState<Feedback | null>(null);
+    const [hasLocalDraft, setHasLocalDraft] = useState(() => {
+        try {
+            return Boolean(localStorage.getItem(STORAGE_KEY));
+        } catch {
+            return false;
         }
-        return { draft: createCustomTestDraft(), feedback: null };
-    } catch {
-        return {
-            draft: createCustomTestDraft(),
-            feedback: {
-                kind: 'error',
-                text: 'Не удалось восстановить черновик. Можно начать новый.',
-            },
-        };
-    }
-}
+    });
 
-export function useTestBuilder() {
-    const [initial] = useState(loadDraft);
-    const [draft, setDraft] = useState(initial.draft);
-    const [feedback, setFeedback] = useState<Feedback | null>(initial.feedback);
+    const restoreDraft = () => {
+        try {
+            const saved: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+            if (isCustomTestDraft(saved)) {
+                setDraft(saved);
+                setTestId(crypto.randomUUID());
+            } else if (
+                typeof saved === 'object' &&
+                saved !== null &&
+                'draft' in saved &&
+                isCustomTestDraft(saved.draft) &&
+                'id' in saved &&
+                typeof saved.id === 'string' &&
+                /^[a-f\d]{8}-[a-f\d]{4}-4[a-f\d]{3}-[89ab][a-f\d]{3}-[a-f\d]{12}$/i.test(saved.id)
+            ) {
+                setDraft(saved.draft);
+                setTestId(saved.id);
+            } else throw new Error('Invalid draft');
+            setFeedback({ kind: 'info', text: 'Открыт локальный черновик.' });
+        } catch {
+            setFeedback({ kind: 'error', text: 'Не удалось открыть локальный черновик.' });
+        }
+    };
 
     const updateDraft = (update: (current: CustomTestDraft) => CustomTestDraft) => {
         setDraft(update);
@@ -111,7 +119,8 @@ export function useTestBuilder() {
 
     const saveDraft = () => {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ id: testId, draft }));
+            setHasLocalDraft(true);
             setFeedback({ kind: 'saved', text: 'Черновик сохранён на этом устройстве.' });
         } catch {
             setFeedback({
@@ -122,8 +131,11 @@ export function useTestBuilder() {
     };
 
     return {
+        testId,
         draft,
         feedback,
+        hasLocalDraft,
+        restoreDraft,
         setTitle,
         addQuestion,
         removeQuestion,

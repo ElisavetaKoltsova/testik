@@ -12,7 +12,7 @@
         "build:api": "npm run db:generate && tsc -p tsconfig.server.json",
         "start:api": "node dist-server/index.js",
         "test:api": "tsx --test server/app.test.ts server/auth/telegram.test.ts server/routes/personalTests/personalTests.test.ts",
-        "test:db": "tsx --test server/database/integration.test.ts server/database/persistence.test.ts",
+        "test:db": "tsx --test server/database/integration.test.ts server/database/persistence.test.ts server/database/list.test.ts",
         "db:up": "docker compose up -d --wait postgres",
         "db:down": "docker compose down",
         "db:status": "docker compose ps",

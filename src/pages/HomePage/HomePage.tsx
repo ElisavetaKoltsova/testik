@@ -1,9 +1,11 @@
-import { Section } from '@telegram-apps/telegram-ui';
+import { Button, Section } from '@telegram-apps/telegram-ui';
+import { useNavigate } from 'react-router-dom';
 import { Hero, TestCard, CustomTestCard } from '../../components';
 import { readyTests } from '../../data';
 import './HomePage.css';
 
 export function HomePage() {
+    const navigate = useNavigate();
     return (
         <>
             <Hero
@@ -30,6 +32,15 @@ export function HomePage() {
                 ))}
             </Section>
             <CustomTestCard />
+            <Button
+                className="rounded-button my-tests-button"
+                size="l"
+                mode="outline"
+                stretched
+                onClick={() => navigate('/my-tests')}
+            >
+                Мои тесты
+            </Button>
             <p className="privacy-note">
                 Личные ответы — общая картина.
                 <br />
