@@ -11,7 +11,7 @@
         "build:web": "tsc --noEmit && vite build",
         "build:api": "npm run db:generate && tsc -p tsconfig.server.json",
         "start:api": "node dist-server/index.js",
-        "test:api": "tsx --test server/app.test.ts",
+        "test:api": "tsx --test server/app.test.ts server/auth/telegram.test.ts",
         "test:db": "tsx --test server/database/integration.test.ts",
         "db:up": "docker compose up -d --wait postgres",
         "db:down": "docker compose down",

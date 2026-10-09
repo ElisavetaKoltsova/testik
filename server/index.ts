@@ -2,7 +2,7 @@ import { buildApp } from './app.js';
 import { createDatabaseClient } from './database/index.js';
 
 const database = createDatabaseClient();
-const app = buildApp({ logger: true, database });
+const app = buildApp({ logger: true, database, botToken: process.env.BOT_TOKEN?.trim() });
 
 for (const signal of ['SIGINT', 'SIGTERM'] as const) {
     process.once(signal, () => {
